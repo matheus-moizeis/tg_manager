@@ -15,7 +15,7 @@ namespace Manager.Infra.Repositories
     public class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
         #region Propriedades
-        
+
         private readonly ManagerContext _context;
 
         #endregion
@@ -50,7 +50,7 @@ namespace Manager.Infra.Repositories
         public virtual async Task Remove(long id)
         {
             var obj = await Get(id);
-            
+
             if (obj != null)
             {
                 _context.Remove(obj);
@@ -64,7 +64,7 @@ namespace Manager.Infra.Repositories
                                     .AsNoTracking()
                                     .Where(x => x.Id == id)
                                     .ToListAsync();
-            
+
             return obj.FirstOrDefault();
         }
 

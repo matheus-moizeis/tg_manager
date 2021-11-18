@@ -2,7 +2,6 @@
 
 using Manager.Core.Exceptions;
 using Manager.Domain.Validators;
-using System;
 using System.Collections.Generic;
 
 #endregion
@@ -69,7 +68,7 @@ namespace Manager.Domain.Entities
                 {
                     _errors.Add(error.ErrorMessage);
 
-                    throw new DomainException("Campos inválidos, favor verificar" , _errors);
+                    throw new DomainException("Campos inválidos, favor verificar", _errors);
 
                 }
             }

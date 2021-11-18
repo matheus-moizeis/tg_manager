@@ -25,7 +25,12 @@
       "ProjectGuid": "3cd7b1c7-2a7d-4ce0-ab98-917e4f7f8b32",
       "DisplayName": "Manager.Core",
       "ColorIndex": 4
+    },
+    "65d649a5-b633-4b23-9625-5534f50a97f4": {
+      "ProjectGuid": "65d649a5-b633-4b23-9625-5534f50a97f4",
+      "DisplayName": "Manager.API",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 5
+  "NextColorIndex": 6
 }

@@ -22,10 +22,10 @@ namespace Manager.Infra.Context
 
         #region Config. Migrations
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=SERVIDOR;Initial Catalog=NOME_BANCO;User ID=USUARIO;Password=SENHA");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Data Source=SERVIDOR;Initial Catalog=NOME_BANCO;User ID=USUARIO;Password=SENHA");
+        //}
 
         #endregion
 
