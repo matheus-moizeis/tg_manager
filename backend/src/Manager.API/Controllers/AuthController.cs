@@ -3,9 +3,11 @@
 using Manager.API.Token;
 using Manager.API.Utilities;
 using Manager.API.ViewModels;
+using Manager.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -18,15 +20,21 @@ namespace Manager.API.Controllers
 
         private readonly IConfiguration _configuration;
         private readonly ITokenGenerator _tokenGenerator;
+        private readonly IUserService _userService;
 
         #endregion
 
         #region Construtor
 
-        public AuthController(IConfiguration configuration, ITokenGenerator tokenGenerator)
+        public AuthController(
+            IConfiguration configuration,
+            ITokenGenerator tokenGenerator,
+            IUserService userService
+            )
         {
             _configuration = configuration;
             _tokenGenerator = tokenGenerator;
+            _userService = userService;
         }
 
         #endregion
@@ -35,14 +43,20 @@ namespace Manager.API.Controllers
 
         [HttpPost]
         [Route("/api/v1/auth/login")]
-        public IActionResult Login([FromBody] LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel loginViewModel)
         {
+
+            var user = await _userService.GetByEmail(loginViewModel.Email);
+
+            if (user == null)
+                return StatusCode(401, Responses.UnauthorizedErrorMessage());
+
             try
             {
-                var tokenLogin = _configuration["Jwt:Login"];
-                var tokenPassword = _configuration["Jwt:Password"];
+                var tokenLogin = user.Email;
+                var tokenPassword = user.Password;
 
-                if (loginViewModel.Login == tokenLogin && loginViewModel.Password == tokenPassword)
+                if (loginViewModel.Email == tokenLogin && loginViewModel.Password == tokenPassword)
                 {
                     return Ok(new ResultViewModel
                     {
