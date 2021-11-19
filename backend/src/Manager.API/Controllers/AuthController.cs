@@ -1,5 +1,6 @@
 ﻿#region Namespaces
 
+using EscNet.Cryptography.Interfaces;
 using Manager.API.Token;
 using Manager.API.Utilities;
 using Manager.API.ViewModels;
@@ -21,6 +22,7 @@ namespace Manager.API.Controllers
         private readonly IConfiguration _configuration;
         private readonly ITokenGenerator _tokenGenerator;
         private readonly IUserService _userService;
+        private readonly IRijndaelCryptography _rijndaelCryptography;
 
         #endregion
 
@@ -29,12 +31,13 @@ namespace Manager.API.Controllers
         public AuthController(
             IConfiguration configuration,
             ITokenGenerator tokenGenerator,
-            IUserService userService
-            )
+            IUserService userService,
+            IRijndaelCryptography rijndaelCryptography)
         {
             _configuration = configuration;
             _tokenGenerator = tokenGenerator;
             _userService = userService;
+            _rijndaelCryptography = rijndaelCryptography;
         }
 
         #endregion
@@ -50,13 +53,15 @@ namespace Manager.API.Controllers
 
             if (user == null)
                 return StatusCode(401, Responses.UnauthorizedErrorMessage());
+            
+            user.Password = _rijndaelCryptography.Decrypt(user.Password);
 
             try
             {
-                var tokenLogin = user.Email;
+                var tokenEmail = user.Email;
                 var tokenPassword = user.Password;
 
-                if (loginViewModel.Email == tokenLogin && loginViewModel.Password == tokenPassword)
+                if (loginViewModel.Email == tokenEmail && loginViewModel.Password == tokenPassword)
                 {
                     return Ok(new ResultViewModel
                     {

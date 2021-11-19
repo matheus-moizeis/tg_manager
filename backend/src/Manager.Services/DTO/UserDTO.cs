@@ -1,4 +1,6 @@
-﻿namespace Manager.Services.DTO
+﻿using System.Text.Json.Serialization;
+
+namespace Manager.Services.DTO
 {
     public class UserDTO
     {
@@ -9,7 +11,8 @@
         public string Name { get; set; }
 
         public string Email { get; set; }
-
+        
+        [JsonIgnore]
         public string Password { get; set; }
 
         #endregion

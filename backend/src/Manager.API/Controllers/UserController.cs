@@ -51,7 +51,12 @@ namespace Manager.API.Controllers
                 {
                     Message = "Usuário criado com sucesso",
                     Success = true,
-                    Data = userCreated
+                    Data = new
+                    {
+                        Id = userCreated.Id,
+                        Name = userCreated.Name,
+                        Email = userCreated.Email
+                    }
                 });
             }
             catch (DomainException ex)
