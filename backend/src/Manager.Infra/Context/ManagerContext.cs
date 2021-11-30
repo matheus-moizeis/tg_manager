@@ -32,6 +32,7 @@ namespace Manager.Infra.Context
         #region Tabelas
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Funcionario> Funcionarios { get; set; }
 
         #endregion
 
@@ -39,7 +40,9 @@ namespace Manager.Infra.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             builder.ApplyConfiguration(new UserMap());
+            builder.ApplyConfiguration(new FuncionarioMap());
         }
 
         #endregion

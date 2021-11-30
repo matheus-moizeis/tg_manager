@@ -72,6 +72,10 @@ namespace Manager.API
                 cfg.CreateMap<User, UserDTO>().ReverseMap();
                 cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
                 cfg.CreateMap<UpdateUserViewModel, UserDTO>().ReverseMap();
+
+                cfg.CreateMap<Funcionario, FuncionarioDTO>().ReverseMap();
+                cfg.CreateMap<CreateFuncionarioViewModel, FuncionarioDTO>().ReverseMap();
+                cfg.CreateMap<UpdateFuncionarioViewModel, FuncionarioDTO>().ReverseMap();
             });
 
             services.AddSingleton(autoMapperConfig.CreateMapper());
@@ -82,9 +86,25 @@ namespace Manager.API
 
             services.AddSingleton(d => Configuration);
             services.AddDbContext<ManagerContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DB_MANAGER"]), ServiceLifetime.Transient);
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            #region User
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            #endregion
+
+            #region Pessoas
+
+            #region Funcionario
+
+            services.AddScoped<IFuncionarioService, FuncionarioService>();
+            services.AddScoped<IFuncionarioRepository, FuncionarioRespository>();
+            
+            #endregion
+
+            #endregion
 
             #endregion
 
