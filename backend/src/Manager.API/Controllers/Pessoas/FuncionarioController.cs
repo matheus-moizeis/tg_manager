@@ -6,6 +6,7 @@ using Manager.API.ViewModels;
 using Manager.Core.Exceptions;
 using Manager.Services.DTO;
 using Manager.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace Manager.API.Controllers
 
 
         [HttpGet]
+        [Authorize]
         [Route("/api/v1/funcionario/get/{id}")]
         public async Task<IActionResult> Get(long id)
         {
@@ -71,6 +73,7 @@ namespace Manager.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("/api/v1/funcionario/search-by-nome")]
         public async Task<IActionResult> SearchByName([FromQuery] string name)
         {
@@ -104,6 +107,7 @@ namespace Manager.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("/api/v1/funcionario/get-by-nome")]
         public async Task<IActionResult> GetByNome([FromQuery] string nome)
         {
@@ -140,6 +144,7 @@ namespace Manager.API.Controllers
         #region CRUD   
 
         [HttpPost]
+        [Authorize]
         [Route("/api/v1/funcionarios/create")]
         public async Task<IActionResult> Create([FromBody] CreateFuncionarioViewModel funcionarioVM)
         {
@@ -172,6 +177,7 @@ namespace Manager.API.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("/api/v1/funcionarios/update")]
         public async Task<IActionResult> Update([FromBody] UpdateFuncionarioViewModel funcionarioVM)
         {
@@ -199,6 +205,7 @@ namespace Manager.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("/api/v1/funcionarios/get-all")]
         public async Task<IActionResult> Get()
         {
@@ -224,6 +231,7 @@ namespace Manager.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("/api/v1/funcionario/remove/{id}")]
         public async Task<IActionResult> Remove(long id)
         {
