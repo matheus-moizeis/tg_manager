@@ -76,6 +76,10 @@ namespace Manager.API
                 cfg.CreateMap<Funcionario, FuncionarioDTO>().ReverseMap();
                 cfg.CreateMap<CreateFuncionarioViewModel, FuncionarioDTO>().ReverseMap();
                 cfg.CreateMap<UpdateFuncionarioViewModel, FuncionarioDTO>().ReverseMap();
+
+                cfg.CreateMap<Cliente, ClienteDTO>().ReverseMap();
+                cfg.CreateMap<CreateClienteViewModel, ClienteDTO>().ReverseMap();
+                cfg.CreateMap<UpdateClienteViewModel, ClienteDTO>().ReverseMap();
             });
 
             services.AddSingleton(autoMapperConfig.CreateMapper());
@@ -101,7 +105,14 @@ namespace Manager.API
 
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRespository>();
-            
+
+            #endregion
+
+            #region Cliente
+
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IClienteRepository, ClienteRespository>();
+
             #endregion
 
             #endregion
