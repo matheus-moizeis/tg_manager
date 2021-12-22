@@ -22,10 +22,10 @@ namespace Manager.Infra.Context
 
         #region Config. Migrations
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=ManagerApi;User ID=sa;Password=C2BK7cry$");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Data Source=LOCAL;Initial Catalog=BANCO;User ID=USUARIO;Password=SENHA");
+        //}
 
         #endregion
 
@@ -34,6 +34,7 @@ namespace Manager.Infra.Context
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Funcionario> Funcionarios { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Relacionamento> Relacionamentos{ get; set; }
 
         #endregion
 
@@ -45,6 +46,7 @@ namespace Manager.Infra.Context
             builder.ApplyConfiguration(new UserMap());
             builder.ApplyConfiguration(new FuncionarioMap());
             builder.ApplyConfiguration(new ClienteMap());
+            builder.ApplyConfiguration(new RelacionamentoMap());
         }
 
         #endregion
