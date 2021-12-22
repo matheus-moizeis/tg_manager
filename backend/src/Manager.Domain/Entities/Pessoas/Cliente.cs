@@ -2,6 +2,7 @@
 
 using Manager.Core.Exceptions;
 using Manager.Domain.Validators;
+using System.Collections.Generic;
 
 #endregion
 
@@ -20,6 +21,23 @@ namespace Manager.Domain.Entities
         public float Telefone { get; set; }
 
         public bool Ativo { get; set; }
+
+        public ICollection<Relacionamento> Relacionamentos { get; set; }
+
+        #endregion
+
+        #region Construtor
+
+        public Cliente(string nome, float cpf, string endereco, float telefone, bool ativo)
+        {
+            Nome = nome;
+            Cpf = cpf;
+            Endereco = endereco;
+            Telefone = telefone;
+            Ativo = ativo;
+            Relacionamentos = new List<Relacionamento>();
+        }
+
 
         #endregion
 

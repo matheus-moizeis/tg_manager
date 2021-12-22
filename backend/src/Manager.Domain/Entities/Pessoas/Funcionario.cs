@@ -3,6 +3,7 @@
 using Manager.Core.Exceptions;
 using Manager.Domain.Validators;
 using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -20,6 +21,8 @@ namespace Manager.Domain.Entities
 
         public DateTime? DataAlteracao { get; set; }
 
+        public ICollection<Relacionamento> Relacionamentos { get; set; }
+
         #endregion
 
         #region Construtores
@@ -30,6 +33,7 @@ namespace Manager.Domain.Entities
             Ativo = ativo;
             DataCadastro = dataCadastro;
             DataAlteracao = dataAlteracao;
+            Relacionamentos = new List<Relacionamento>();
 
             Validate();
         }
